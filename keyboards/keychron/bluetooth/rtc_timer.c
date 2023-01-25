@@ -1,4 +1,4 @@
-/* Copyright 2022 @ lokher (https://www.keychron.com)
+/* Copyright 2023 @ lokher (https://www.keychron.com)
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -13,27 +13,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+ 
+#include "hal.h"
 
-#pragma once
+#if (HAL_USE_RTC)
 
-typedef enum {
-    TRANSPORT_NONE,
-    TRANSPORT_USB,
-    TRANSPORT_BLUETOOTH,
-} transport_t;
+#    include "rtc_timer.h"
 
-#ifdef NKRO_ENABLE
-typedef struct {
-    bool usb : 1;
-    bool bluetooth : 1;
-} nkro_t;
+void rtc_timer_init(void) {
+    rtc_timer_clear();
+}
+
+void rtc_timer_clear(void) {
+    RTCDateTime tm = {0, 0, 0, 0, 0, 0};
+    rtcSetTime(&RTCD1, &tm);
+}
+
+uint32_t rtc_timer_read_ms(void) {
+    RTCDateTime tm;
+    rtcGetTime(&RTCD1, &tm);
+
+    return tm.millisecond;
+}
+
+uint32_t rtc_timer_elapsed_ms(uint32_t last) {
+    return TIMER_DIFF_32(rtc_timer_read_ms(), last);
+}
+
 #endif
-
-void        set_transport(transport_t new_transport);
-transport_t get_transport(void);
-
-void bt_transport_enable(bool enable);
-void usb_power_connect(void);
-void usb_power_disconnect(void);
-void usb_transport_enable(bool enable);
-void usb_remote_wakeup(void);
