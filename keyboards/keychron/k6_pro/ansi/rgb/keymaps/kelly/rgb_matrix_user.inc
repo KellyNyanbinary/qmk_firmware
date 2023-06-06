@@ -13,7 +13,7 @@ RGB_MATRIX_EFFECT(trans_flag)
 #ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 
 // Trans Flag. 
-HSV lightBlue = {.h = 140, .s = 165, .v = 230 };
+HSV lightBlue = {.h = 140, .s = 165, .v = 255 };
 HSV pink = {.h = 0, .s = 165, .v = 255 };
 HSV white = {.h = 0, .s = 0, .v = 255 };
 
