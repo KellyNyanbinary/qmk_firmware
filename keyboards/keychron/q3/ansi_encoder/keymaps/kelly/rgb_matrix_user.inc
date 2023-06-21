@@ -15,7 +15,7 @@ RGB_MATRIX_EFFECT(orange_effect)
 
 // Trans flag colors. 
 HSV lightBlue = {.h = 140, .s = 165, .v = 255 };
-HSV pink = {.h = 0, .s = 165, .v = 255 };
+HSV pink = {.h = 0, .s = 200, .v = 255 };
 HSV white = {.h = 0, .s = 0, .v = 255 };
 
 HSV black = {.h = 0, .s = 0, .v = 0 };
@@ -45,7 +45,7 @@ static bool trans_flag_effect(effect_params_t* params) {
 }
 
 // Orange colors.
-HSV orange = {.h = 7, .s = 255, .v = 255 }; 
+HSV orange = {.h = 5, .s = 255, .v = 255 }; 
 
 // Orange effect.
 static bool orange_effect(effect_params_t* params) {
